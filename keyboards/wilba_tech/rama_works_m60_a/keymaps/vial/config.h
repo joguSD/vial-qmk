@@ -9,3 +9,9 @@
 #define DRIVER_ADDR_1 0x74
 #define DRIVER_ADDR_2 0x76
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+
+
+// Disable the wilbatech RGB
+#undef RGB_BACKLIGHT_M60_A
+#undef RGB_BACKLIGHT_ENABLED
+#define RGB_BACKLIGHT_ENABLED 0
