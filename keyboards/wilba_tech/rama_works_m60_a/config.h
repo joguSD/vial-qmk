@@ -40,7 +40,7 @@
 //#define NO_ACTION_TAPPING
 //#define NO_ACTION_ONESHOT
 
-//#define RGB_BACKLIGHT_ENABLED 1
+#define RGB_BACKLIGHT_ENABLED 0
 
 // This conditionally compiles the backlight code for M60-A specifics
 //#define RGB_BACKLIGHT_M60_A
