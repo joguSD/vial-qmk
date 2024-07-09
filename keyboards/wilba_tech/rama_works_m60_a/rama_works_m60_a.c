@@ -13,6 +13,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "quantum.h"
+
 #ifndef RGB_BACKLIGHT_M60_A
 #    error RGB_BACKLIGHT_M60_A not defined, you done goofed somehao, brah
 #else
@@ -20,7 +22,6 @@
 #endif
 
 #if defined(RGB_MATRIX_ENABLE) || defined(RGB_BACKLIGHT_M60_A)
-#define ___ NO_LED
 const is31fl3731_led_t PROGMEM g_is31fl3731_leds[IS31FL3731_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -104,18 +105,20 @@ const is31fl3731_led_t PROGMEM g_is31fl3731_leds[IS31FL3731_LED_COUNT] = {
     {1, C9_16, C7_15, C6_15}, // LD16
     {1, C8_16, C7_16, C6_16}, // LD17
 };
+#endif
 
+#if defined(RGB_MATRIX_ENABLE)
 led_config_t g_led_config = { {
     // A17, A16, A15, A14, A13, A12, A11, A10,  A9,  B0,  B1,  B2,  B3,  B4,
     //  A7,  A6,  A5,  A4,  A3,  A2,  A1,  A0,  B9, B10, B11, B12, B13, B14,
     //  A8, C14, C13, C12, C11, C10,  C9,  D0,  D1,  D2,  D3,  D4,  D5,  B5,
     // C16, ---,  C5,  C4,  C3,  C2,  C1,  D9, D10, D11, D12,  D6,  D7,  D8,
     // ---,  C8,  C7,  C6, ---, ---, ---,  C0, ---, ---, D14, D15, D16, ---,
-    {  0+17,  0+16,  0+15,  0+14,  0+13,  0+12,  0+11,  0+10,   0+9,  18+0,  18+1,  18+2,  18+3,  18+4 },
-    {   0+7,   0+6,   0+5,   0+4,   0+3,   0+2,   0+1,   0+0,  18+9, 18+10, 18+11, 18+12, 18+13, 18+14 },
-    {   0+8, 36+14, 36+13, 36+12, 36+11, 36+10,  36+9,  54+0,  54+1,  54+2,  54+3,  54+4,  54+5,  18+5 },
-    { 36+16,   ___,  36+5,  36+4,  36+3,  36+2,  36+1,  54+9, 54+10, 54+11, 54+12,  54+6,  54+7,  54+8 },
-    {   ___,  36+8,  36+7,  36+6,   ___,   ___,   ___, 36+0,    ___,   ___, 54+14, 54+15, 54+16,   ___ }
+    {   0+17,   0+16,  0+15,  0+14,   0+13,   0+12,   0+11,  0+10,    0+9,   18+0,  18+1,  18+2,  18+3,   18+4 },
+    {    0+7,    0+6,   0+5,   0+4,    0+3,    0+2,    0+1,   0+0,   18+9,  18+10, 18+11, 18+12, 18+13,  18+14 },
+    {    0+8,  36+14, 36+13, 36+12,  36+11,  36+10,   36+9,  54+0,   54+1,   54+2,  54+3,  54+4,  54+5,   18+5 },
+    {  36+16, NO_LED,  36+5,  36+4,   36+3,   36+2,   36+1,  54+9,  54+10,  54+11, 54+12,  54+6,  54+7,   54+8 },
+    { NO_LED,   36+8,  36+7,  36+6, NO_LED, NO_LED, NO_LED,  36+0, NO_LED, NO_LED, 54+14, 54+15, 54+16, NO_LED }
 }, {
     // LA0..LA17
     {120,16}, {104,16}, {88,16}, {72,16}, {56,16}, {40,16}, {24,16}, {4,16}, {8,32},
